@@ -67,4 +67,20 @@ public class User {
 		students.add(student);
 	}
 	
+	/**
+	 * Gets the version that this user sees
+	 * @return the version number
+	 */
+	public int version() {
+		return version;
+	}
+	
+	/**
+	 * Sets the version that this user sees
+	 * @param version the new version number
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
 }
