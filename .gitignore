@@ -1,0 +1,9 @@
+# Ignore everything
+/*
+
+# Except ...
+!/src/
+!.gitignore
+!pom.xml
+!.travis.yml
+
