@@ -55,7 +55,7 @@ public class User {
 	 * Adds a coach to this user
 	 * @param coach the coach
 	 */
-	public void addCoach(User coach) {
+	protected void addCoach(User coach) {
 		coaches.add(coach);
 	}
 	
@@ -63,7 +63,7 @@ public class User {
 	 * Adds a student to this user
 	 * @param student the student
 	 */
-	public void addStudent(User student) {
+	protected void addStudent(User student) {
 		students.add(student);
 	}
 	
