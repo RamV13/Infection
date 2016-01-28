@@ -68,6 +68,22 @@ public class User {
 	}
 	
 	/**
+	 * Gets the number of coaches for this user
+	 * @return the number of coaches
+	 */
+	protected int numCoaches() {
+		return coaches.size();
+	}
+	
+	/**
+	 * Gets the number of students for this user
+	 * @return the number of students
+	 */
+	protected int numStudents() {
+		return students.size();
+	}
+	
+	/**
 	 * Gets the version that this user sees
 	 * @return the version number
 	 */
