@@ -16,6 +16,7 @@
  */
 package com.ram.kainterview;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,6 +66,22 @@ public class User {
 	 */
 	protected void addStudent(User student) {
 		students.add(student);
+	}
+	
+	/**
+	 * Gets a read-only version of the list of coaches
+	 * @return the list of coaches
+	 */
+	protected List<User> coaches() {
+		return Collections.unmodifiableList(coaches);
+	}
+	
+	/**
+	 * Gets a read-only version of the list of students
+	 * @return the list of students
+	 */
+	protected List<User> students() {
+		return Collections.unmodifiableList(students);
 	}
 	
 	/**
