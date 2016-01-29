@@ -5,6 +5,7 @@
   <version>1.0</version>
   <build>
     <sourceDirectory>src</sourceDirectory>
+    <testSourceDirectory>test</testSourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -16,4 +17,35 @@
       </plugin>
     </plugins>
   </build>
+  
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <licenses>
+    <license>
+	  <name>MIT License</name>
+		<url>https://opensource.org/licenses/MIT</url>
+		<distribution>repo</distribution>
+	</license>
+  </licenses>
+
+  <issueManagement>
+	<system>Github Issue Tracking</system>
+	  <url>https://github.com/ramv13/HttpClient/issues</url>
+  </issueManagement>
+
+  <developers>
+	<developer>
+	  <name>Ram Vellanki</name>
+		<email>ram.v.apps@gmail.com</email>
+		<url>http://www.ramvellanki.com/</url>
+	</developer>
+  </developers>
+  
 </project>

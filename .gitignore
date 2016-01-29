@@ -3,6 +3,7 @@
 
 # Except ...
 !/src/
+!/test/
 !.gitignore
 !pom.xml
 !.travis.yml
