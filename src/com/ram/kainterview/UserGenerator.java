@@ -17,111 +17,84 @@
 package com.ram.kainterview;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Class for generating a random artificial user base
  */
 public class UserGenerator {
-	
+
 	/**
-	 * List of ALL student users (i.e. the non-top-level users)
+	 * General probability of using an existing user versus creating a new user
+	 * (higher value leads to increased randomness but less performance)
 	 */
-	private static List<User> students;
-	
-	/**
-	 * Number of random attempts before simply iterating through the student 
-	 * list (affects performance/randomness)
-	 */
-	private static final int ITERATION_NUMBER = 10;
-	
+	private static final double probability = 0.1;
+
 	// prevents instantiation
 	private UserGenerator() { }
-	
-	// TODO: max is not high enough to have 1.0 probability???
-	
+
 	/**
 	 * Generates a random artificial user base given the specifications such as
 	 * the number of top-level users
-	 * @param numTopLevel the number of top-level users (requires: >= 1)
-	 * @param maxNumStudents the maximum number of students per user 
-	 * (requires: >= 0)
-	 * @param maxNumCoaches the maximum number of coaches per user 
-	 * (requires: >=0)
-	 * @param probability the probability of a user's student already being that
-	 *  of another coach (requires: 0.0 <= probability <= 1.0)
-	 * @return the top-level users in the graph of the user base
+	 * @param min minimum number of users (requires: >= 1)
+	 * @param maxStudents maximum number of direct students per user
+	 * @param levels number of levels of coach-student relationships to generate
+	 * @return list of all users in the graph of the user base
 	 */
-	public static List<User> generateUsers(int numTopLevel, int maxNumStudents,
-			int maxNumCoaches, double probability) {
-		if (numTopLevel < 1)
-			throw new IllegalArgumentException("numTopLevel must be > 0");
-		else if (maxNumStudents < 0)
-			throw new IllegalArgumentException("maxNumStudents must be >= 0");
-		else if (maxNumCoaches  < 0)
-			throw new IllegalArgumentException("maxNumCoaches must be >= 0");
-		else if (probability < 0 || probability > 1)
-			throw new IllegalArgumentException(
-					"probability must be within 0 and 1 inclusive");
+	public static List<User> generateUsers(int min, int maxStudents, int levels) {
+		if (min < 1)
+			throw new IllegalArgumentException("min must be > 0");
+		else if (maxStudents < 0)
+			throw new IllegalArgumentException("maxStudents must be >= 0");
+		else if (levels < 1)
+			throw new IllegalArgumentException("levels must be > 0");
 
-		List<User> users = new LinkedList<User>(); // top-level users
-		students = new ArrayList<User>(); // student users
-		
-		for (int i = 0; i < numTopLevel; i++) {
-			User user = new User(); // create new top-level user
+		List<User> users = new ArrayList<User>(); // all users
+
+		for (int i = 0; i < min; i++) {
+			User user = new User(); // create new user
 			users.add(user);
-			
-			// populate students for this top-level user
-			int numStudents = (int) Math.round(Math.random()*maxNumStudents);
-			for (int j = 0; j < numStudents; j++) {
-				if (Math.random() > probability) { // use new student
-					User student = new User();
-					user.addStudent(student);
-					student.addCoach(user);
-				} else {                          // use existing student
-					// generate first student if none exist
-					if (students.isEmpty())
-						students.add(new User());
-					
-					// select random student that will not exceed maxNumCoaches
-					User student = null;
-					int count = 0;
-					boolean selected = false;
-					while (count < ITERATION_NUMBER) {
-						student = students.get(
-								(int) (Math.random()*students.size()));
-						if (student.numCoaches()+1 < maxNumCoaches) {
-							selected = true;
-							break;
-						}
-						count++;
-					}
-					
-					if (!selected) {
-						// iterate through to find a valid student
-						for (int k = 0; k < students.size(); k++) {
-							student = students.get(k);
-							if (student.numCoaches()+1 < maxNumCoaches) {
-								selected = true;
-								break;
-							}
-						}
-					}
-					
-					if (selected) {
-						user.addStudent(student);
-						student.addCoach(user);
-					} else {
-						throw new IllegalArgumentException("Parameters "
-								+ "conflict and there is no arrangement that "
-								+ "can satisfy all specifications"); 
-					}
-				}
-			}
+			populateUser(users,user,maxStudents,levels);
 		}
-		
+
 		return users;
+	}
+
+	/**
+	 * Populates the students of this user recursively
+	 * @param users the list of ALL users in the user base graph
+	 * @param user the current user to populate
+	 * @param maxStudents the maximum number of direct students per user
+	 * @param levels the number of levels of coach-student relationships 
+	 * (i.e. the number of levels to descend recursively)
+	 */
+	private static void populateUser(List<User> users, User user, 
+			int maxStudents, int levels) {
+		if (levels == 0)
+			return;
+		
+		int numStudents = (int) Math.round(Math.random()*maxStudents);
+		// populate students for this top-level user
+		for (int j = 0; j < numStudents; j++) {
+			User student;
+			boolean newStudent = true;
+			if (Math.random() > probability) // use new student
+				student = new User();
+			else {                           // use existing student
+				student = users.get((int) (Math.random()*users.size()));
+				if (user.students().contains(student))
+					student = new User();
+				else
+					newStudent = false;
+			}
+			
+			user.addStudent(student);
+			student.addCoach(user);
+			
+			// only populate the new students
+			if (newStudent)
+				populateUser(users,student,maxStudents,levels-1);
+		}
 	}
 	
 }
