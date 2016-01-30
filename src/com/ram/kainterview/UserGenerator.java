@@ -43,11 +43,11 @@ public class UserGenerator {
 	 */
 	public static List<User> generateUsers(int min, int maxStudents, int levels) {
 		if (min < 1)
-			throw new IllegalArgumentException("min must be > 0");
+			throw new IllegalArgumentException(Error.MIN_USERS.toString());
 		else if (maxStudents < 0)
-			throw new IllegalArgumentException("maxStudents must be >= 0");
+			throw new IllegalArgumentException(Error.MAX_STUDENTS.toString());
 		else if (levels < 1)
-			throw new IllegalArgumentException("levels must be > 0");
+			throw new IllegalArgumentException(Error.LEVELS.toString());
 
 		List<User> users = new ArrayList<User>(); // all users
 
