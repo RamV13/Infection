@@ -82,18 +82,21 @@ public class UserGenerator {
 				student = new User();
 			else {                           // use existing student
 				student = users.get((int) (Math.random()*users.size()));
-				if (user.students().contains(student))
+				if (user.students().contains(student) || user.equals(student))
 					student = new User();
 				else
 					newStudent = false;
 			}
 			
+			// set up coach-student relation
 			user.addStudent(student);
 			student.addCoach(user);
 			
 			// only populate the new students
-			if (newStudent)
+			if (newStudent) {
+				users.add(student);
 				populateUser(users,student,maxStudents,levels-1);
+			}
 		}
 	}
 	
