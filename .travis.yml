@@ -4,7 +4,7 @@ jdk:
 - oraclejdk8
 
 script:
-- mvn clean test -e
+- mvn clean test
 
 notifications:
   email: false
