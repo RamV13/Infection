@@ -40,6 +40,7 @@ public class Main {
 	 */
 	private static void printHelp() {
 		System.out.println(USAGE);
+		System.out.println();
 		System.out.println("<MINIMUM_USERS>: the minimum number of users in the"
 				+ " user base");
 		System.out.println("<MAXIMUM_STUDENTS>: the maximum number of students "
