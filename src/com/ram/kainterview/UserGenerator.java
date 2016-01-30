@@ -49,7 +49,7 @@ public class UserGenerator {
 		else if (levels < 1)
 			throw new IllegalArgumentException(Error.LEVELS.toString());
 
-		List<User> users = new ArrayList<User>(); // all users
+		List<User> users = new ArrayList<>(); // all users
 
 		for (int i = 0; i < min; i++) {
 			User user = new User(); // create new user

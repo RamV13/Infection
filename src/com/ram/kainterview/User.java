@@ -56,8 +56,8 @@ public class User {
 	public User() {
 		version = 0;
 		id = UUID.randomUUID().toString();
-		coaches = new LinkedList<User>();
-		students = new LinkedList<User>();
+		coaches = new LinkedList<>();
+		students = new LinkedList<>();
 	}
 	
 	/**
