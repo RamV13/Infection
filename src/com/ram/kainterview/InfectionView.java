@@ -84,7 +84,7 @@ public class InfectionView extends JFrame implements GraphView {
 	 */
 	private void initGraph(String title) {
 		graph = new SingleGraph(title);
-		graph.setStrict(false);
+		graph.setStrict(true);
 		
 		graph.addAttribute("ui.antialias");
 		graph.addAttribute("ui.stylesheet", "graph { fill-color: black; }"
@@ -108,8 +108,10 @@ public class InfectionView extends JFrame implements GraphView {
 	public void addNode(String id, int label, List<String> ids) {
 		Node node = graph.addNode(id);
 		node.setAttribute("ui.label", label);
-		for (String s : ids)
-			graph.addEdge(id+s, id, s);
+		for (String s : ids) {
+			if (graph.getNode(s) != null)
+				graph.addEdge(id+s, id, s);
+		}
 	}
 
 	@Override
