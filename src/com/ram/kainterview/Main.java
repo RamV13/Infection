@@ -16,18 +16,22 @@
  */
 package com.ram.kainterview;
 
+import java.util.List;
+
 /**
  * Initializes the application, reads user arguments, and performs the 
  * appropriate infection type (total/limited)
  */
 public class Main {
 
+	private static final String USAGE = "Usage: java -jar <JAR> <MINIMUM_USERS>"
+			+ " <MAXIMUM_STUDENTS> <LEVELS>";
+	
 	/**
 	 * Prints the usage info (i.e. the runtime arguments)
 	 */
 	private static void printUsage() {
-		System.out.println("Usage: java -jar <JAR> <INFECTION_TYPE> "
-				+ "<MINIMUM_USERS> <MAXIMUM_STUDENTS> <LEVELS>");
+		System.out.println(USAGE);
 		System.out.println("For more help: java -jar <JAR> --help");
 	}
 	
@@ -35,10 +39,7 @@ public class Main {
 	 * Prints the help info
 	 */
 	private static void printHelp() {
-		System.out.println("Usage: java -jar <JAR> <INFECTION_TYPE> "
-				+ "<MINIMUM_USERS> <MAXIMUM_STUDENTS> <LEVELS>");
-		System.out.println("<INFECTION_TYPE>: the type of infection "
-				+ "(i.e. \"total_infection\" or \"limited_infection\")");
+		System.out.println(USAGE);
 		System.out.println("<MINIMUM_USERS>: the minimum number of users in the"
 				+ " user base");
 		System.out.println("<MAXIMUM_STUDENTS>: the maximum number of students "
@@ -53,27 +54,37 @@ public class Main {
 	 * @param args the runtime arguments
 	 */
 	public static void main(String[] args) {
-		boolean totalInfection;
+		int minUsers;
+		int maxStudents;
+		int levels;
+		
 		try {
-			if (args[0].equals("total_infection"))
-				totalInfection = true;
-			else if (args[0].equals("limited_infection"))
-				totalInfection = false; // redundancy for code clarity
-			else if (args[0].equals("--help") && args.length == 1) {
+			if (args[0].equals("--help") && args.length == 1) {
 				printHelp();
 				return;
 			} else {
-				printUsage();
-				return;
+				minUsers = Integer.parseInt(args[0]);
+				maxStudents = Integer.parseInt(args[1]);
+				levels = Integer.parseInt(args[2]);
 			}
-		} catch (IndexOutOfBoundsException e) {
+		} catch (IndexOutOfBoundsException | NumberFormatException e) {
 			printUsage();
 			return;
 		}
 		
-		String title = totalInfection ? "Total Infection" : "Limited Infection";
-		GraphView view = new InfectionView(title);
-		GraphController controller = new InfectionController();
+		GraphView view = new InfectionView("Infection");
+		
+		List<User> users;
+		try {
+			users = UserGenerator.generateUsers(minUsers, maxStudents, levels);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			System.out.println();
+			printUsage();
+			return;
+		}
+		
+		GraphController controller = new InfectionController(users);
 		view.initController(controller);
 	}
 	
