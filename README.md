@@ -21,7 +21,7 @@ Choices
 - HashMap
 - UUID (practically unique although not guaranteed)
 
-TODO put label inside node (NOT outside)
+TODO UI usage
 
 TODO recommended parameters
 
