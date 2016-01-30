@@ -69,7 +69,7 @@ public class UserGeneratorTest {
 	 */
 	@Test
 	public void testLargeGeneration() {
-		UserGenerator.generateUsers(100, 100, 3);
+		UserGenerator.generateUsers(50, 50, 3);
 	}
 	
 	/**
