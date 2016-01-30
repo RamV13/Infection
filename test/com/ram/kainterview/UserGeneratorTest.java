@@ -62,6 +62,8 @@ public class UserGeneratorTest {
 	public void testSingleUser() {
 		List<User> users = UserGenerator.generateUsers(1, 0, 3);
 		assertEquals(users.size(),1);
+		assertTrue(user.coaches().isEmpty());
+		assertTrue(user.students().isEmpty());
 	}
 	
 	/**
