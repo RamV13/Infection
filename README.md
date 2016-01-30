@@ -25,4 +25,6 @@ TODO put label inside node (NOT outside)
 
 TODO recommended parameters
 
+TODO arrow direction convention (coach -> student)
+
 Credit [GraphStream](http://graphstream-project.org/) (graphinging library)
