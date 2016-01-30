@@ -27,4 +27,4 @@ TODO recommended parameters
 
 TODO arrow direction convention (coach -> student)
 
-Credit [GraphStream](http://graphstream-project.org/) (graphinging library)
+Credit [GraphStream](http://graphstream-project.org/) (graphing library)
