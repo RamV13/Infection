@@ -83,12 +83,15 @@ public class InfectionView extends JFrame implements GraphView {
 	 * @param title the title
 	 */
 	private void initGraph(String title) {
+		System.setProperty("org.graphstream.ui.renderer",
+                "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
+		
 		graph = new SingleGraph(title);
 		graph.setStrict(true);
 		
 		graph.addAttribute("ui.antialias");
-		graph.addAttribute("ui.stylesheet", "graph { fill-color: black; }"
-				+ "node { size: 20px; fill-color: white; text-color: white; }"
+		graph.addAttribute("ui.stylesheet", "graph {fill-color: black;}"
+				+ "node {size: 20px;fill-color: white;text-alignment: center;}"
 				+ "edge { fill-color: gray; }");
 		
 		viewer = new Viewer(graph,
