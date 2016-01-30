@@ -156,12 +156,18 @@ public class User {
 	 * accordingly by infecting the necessary users
 	 */
 	private void infect() {
-		for (User coach : coaches)
-			if (coach.version != version)
-				coach.setVersion(version);
-		for (User student : students)
-			if (student.version != version)
-				student.setVersion(version);
+		for (User coach : coaches) {
+			if (coach.version != version) {
+				coach.version = version;
+				coach.infect();
+			}
+		}
+		for (User student : students) {
+			if (student.version != version) {
+				student.version = version;
+				student.infect();
+			}
+		}
 	}
 	
 }
