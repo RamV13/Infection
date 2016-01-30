@@ -24,11 +24,12 @@ import com.ram.kainterview.User;
 public class TotalInfection {
 	
 	/**
-	 * Perform total infection starting from the given user
+	 * Perform total infection with the new version starting from the given user
 	 * @param user the user
+	 * @param version the new version
 	 */
-	public static void run(User user) {
-		user.setVersion(1);
+	public static void run(User user, int version) {
+		user.setVersion(version);
 	}
 	
 }
