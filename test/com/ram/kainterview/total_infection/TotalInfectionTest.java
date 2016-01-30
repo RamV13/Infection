@@ -41,12 +41,12 @@ public class TotalInfectionTest {
 		List<User> users = UserGenerator.generateUsers(1, 0, 1);
 		assertEquals(users.size(),1);
 		User user = users.get(0);
-		user.setVersion(1);
+		TotalInfection.run(user, 1);
 		assertEquals(user.version(),1);
 		assertTrue(user.coaches().isEmpty());
 		assertTrue(user.students().isEmpty());
 	}
-	
+
 	/**
 	 * Generate specific user graph and test total infection
 	 */
@@ -54,15 +54,15 @@ public class TotalInfectionTest {
 	public void testSpecificInfection() {
 		List<User> users1 = UserGeneratorTest.generateSpecificUsers();
 		List<User> users2 = UserGeneratorTest.generateSpecificUsers();
-		users1.get(0).setVersion(1);
-		users2.get(0).setVersion(1);
-		
+		TotalInfection.run(users1.get(0),1);
+		TotalInfection.run(users2.get(0),1);
+
 		checkUsers(users1);
 		checkUsers(users2);
 
 		// not part of test (programmer check)
 		assert users1.size() == users2.size();
-		
+
 		for (int i = 0; i < users1.size(); i++) {
 			if (i < 3) {
 				assertEquals(users1.get(i).version(),1);
@@ -72,17 +72,21 @@ public class TotalInfectionTest {
 				assertEquals(users2.get(i).version(),0);
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * Generate random basic user graph and test total infection
 	 */
 	@Test
 	public void testBasicInfection() {
-		checkUsers(UserGenerator.generateUsers(10, 10, 3));
+		for (int i = 0; i < 100; i++) {
+			List<User> users = UserGenerator.generateUsers(10, 10, 3);
+			TotalInfection.run(users.get((int) (Math.random()*users.size())),1);
+			checkUsers(users);
+		}
 	}
-	
+
 	/**
 	 * Checks the users' versions using the classInv() method (accesses the 
 	 * private method using reflection)
