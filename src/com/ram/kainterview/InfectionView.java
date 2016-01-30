@@ -95,7 +95,7 @@ public class InfectionView extends JFrame implements GraphView {
 				Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
 		DefaultView view = (DefaultView) viewer.addDefaultView(false);
 		view.getCamera().setAutoFitView(true);
-		//view.getCamera().setViewCenter(width/2, height/2, 0);
+		view.getCamera().resetView();
 		this.add(view);
 	}
 	

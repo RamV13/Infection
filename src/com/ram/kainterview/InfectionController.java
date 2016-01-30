@@ -16,8 +16,11 @@
  */
 package com.ram.kainterview;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.ui.view.Viewer;
@@ -30,9 +33,9 @@ import org.graphstream.ui.view.ViewerPipe;
 public class InfectionController implements GraphController {
 
 	/**
-	 * List of all users in the user base
+	 * Map of all id's to users in the user base
 	 */
-	private List<User> users;
+	private Map<String,User> users;
 	
 	/**
 	 * Manages GraphStream's ViewerPipe pump requests
@@ -43,21 +46,24 @@ public class InfectionController implements GraphController {
 	 * Constructs a controller with the given user base
 	 */
 	public InfectionController(List<User> users) {
-		this.users = users;
+		this.users = new HashMap<>();
+		for (User user : users)
+			this.users.put(user.id(), user);
+		
 		loop = true;
 	}
 	
 	@Override
 	public void init(GraphView view, Graph graph, Viewer viewer) {
-		for (User user : users) {
+		for (Entry<String,User> entry : users.entrySet()) {
 			// build ids of adjacent nodes
 			List<String> ids = new LinkedList<String>();
-			for (User coach : user.coaches())
+			for (User coach : entry.getValue().coaches())
 				ids.add(coach.id());
-			for (User student : user.students())
+			for (User student : entry.getValue().students())
 				ids.add(student.id());
 			
-			view.addNode(user.id(), user.version(), ids);
+			view.addNode(entry.getKey(), entry.getValue().version(), ids);
 		}
 		
 		ViewerPipe fromViewer = viewer.newViewerPipe();
@@ -69,7 +75,9 @@ public class InfectionController implements GraphController {
 
 			@Override
 			public void buttonReleased(String id) {	
-				System.out.println("Button pushed on node "+id);
+				users.get(id).setVersion(users.get(id).version()+1);
+				for (Entry<String,User> entry : users.entrySet())
+					view.updateNode(entry.getKey(), entry.getValue().version());
 			}
 
 			@Override
