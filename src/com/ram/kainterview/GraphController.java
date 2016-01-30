@@ -17,7 +17,7 @@
 package com.ram.kainterview;
 
 import org.graphstream.graph.Graph;
-import org.graphstream.ui.swingViewer.Viewer;
+import org.graphstream.ui.view.Viewer;
 
 /**
  * Interface for the controller that listens for events on the graph

@@ -24,8 +24,8 @@ import javax.swing.JFrame;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
-import org.graphstream.ui.swingViewer.View;
-import org.graphstream.ui.swingViewer.Viewer;
+import org.graphstream.ui.swingViewer.DefaultView;
+import org.graphstream.ui.view.Viewer;
 
 /**
  * View for the infection model
@@ -93,7 +93,9 @@ public class InfectionView extends JFrame implements GraphView {
 		
 		viewer = new Viewer(graph,
 				Viewer.ThreadingModel.GRAPH_IN_ANOTHER_THREAD);
-		View view = viewer.addDefaultView(false);
+		DefaultView view = (DefaultView) viewer.addDefaultView(false);
+		view.getCamera().setAutoFitView(true);
+		//view.getCamera().setViewCenter(width/2, height/2, 0);
 		this.add(view);
 	}
 	

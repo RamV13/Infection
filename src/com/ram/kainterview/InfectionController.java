@@ -20,9 +20,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.graphstream.graph.Graph;
-import org.graphstream.ui.swingViewer.Viewer;
-import org.graphstream.ui.swingViewer.ViewerListener;
-import org.graphstream.ui.swingViewer.ViewerPipe;
+import org.graphstream.ui.view.Viewer;
+import org.graphstream.ui.view.ViewerListener;
+import org.graphstream.ui.view.ViewerPipe;
 
 /**
  * Controller of the infection model
