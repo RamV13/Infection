@@ -19,6 +19,7 @@ package com.ram.kainterview;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Represents an individual user of the software
@@ -30,6 +31,11 @@ public class User {
 	 * Version that this user sees (base version = 0)
 	 */
 	private int version;
+	
+	/**
+	 * Unique identifier for this user
+	 */
+	private String id;
 	
 	/**
 	 * Contains all of the coaches of this user.
@@ -49,6 +55,7 @@ public class User {
 	 */
 	public User() {
 		version = 0;
+		id = UUID.randomUUID().toString();
 		coaches = new LinkedList<User>();
 		students = new LinkedList<User>();
 	}
@@ -114,6 +121,14 @@ public class User {
 	 */
 	protected int numStudents() {
 		return students.size();
+	}
+	
+	/**
+	 * Gets the id of this user
+	 * @return the id
+	 */
+	public String id() {
+		return id;
 	}
 	
 	/**
