@@ -72,7 +72,7 @@ public class User {
 	 * Gets a read-only version of the list of coaches
 	 * @return the list of coaches
 	 */
-	protected List<User> coaches() {
+	public List<User> coaches() {
 		return Collections.unmodifiableList(coaches);
 	}
 	
@@ -80,7 +80,7 @@ public class User {
 	 * Gets a read-only version of the list of students
 	 * @return the list of students
 	 */
-	protected List<User> students() {
+	public List<User> students() {
 		return Collections.unmodifiableList(students);
 	}
 	
