@@ -22,6 +22,7 @@ import java.util.List;
 
 /**
  * Represents an individual user of the software
+ * Invariant: version number of this user and all coaches and students are equal
  */
 public class User {
 	
@@ -50,6 +51,21 @@ public class User {
 		version = 0;
 		coaches = new LinkedList<User>();
 		students = new LinkedList<User>();
+	}
+	
+	/**
+	 * Checks the invariant of this class that the version numbers should be
+	 * equal across all coaches and students of this user
+	 * @return true of the invariant holds, false otherwise
+	 */
+	private boolean classInv() {
+		for (User coach : coaches)
+			if (this.version != coach.version)
+				return false;
+		for (User student : students)
+			if (this.version != student.version)
+				return false;
+		return true;
 	}
 	
 	/**
@@ -113,7 +129,24 @@ public class User {
 	 * @param version the new version number
 	 */
 	public void setVersion(int version) {
+		assert classInv();
 		this.version = version;
+		infect();
+		assert classInv();
+	}
+	
+	/**
+	 * Checks the invariant of this class that the version numbers should be
+	 * equal across all coaches and students of this user and adjusts 
+	 * accordingly by infecting the necessary users
+	 */
+	private void infect() {
+		for (User coach : coaches)
+			if (coach.version != version)
+				coach.setVersion(version);
+		for (User student : students)
+			if (student.version != version)
+				student.setVersion(version);
 	}
 	
 }
