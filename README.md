@@ -23,4 +23,6 @@ Choices
 
 TODO put label inside node (NOT outside)
 
+TODO recommended parameters
+
 Credit [GraphStream](http://graphstream-project.org/) (graphinging library)
