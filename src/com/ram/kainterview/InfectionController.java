@@ -56,14 +56,17 @@ public class InfectionController implements GraphController {
 	@Override
 	public void init(GraphView view, Graph graph, Viewer viewer) {
 		for (Entry<String,User> entry : users.entrySet()) {
-			// build ids of adjacent nodes
-			List<String> ids = new LinkedList<String>();
-			for (User coach : entry.getValue().coaches())
-				ids.add(coach.id());
-			for (User student : entry.getValue().students())
-				ids.add(student.id());
+			User user = entry.getValue();
 			
-			view.addNode(entry.getKey(), entry.getValue().version(), ids);
+			// build ids of adjacent nodes
+			List<String> toIds = new LinkedList<String>();
+			List<String> fromIds = new LinkedList<String>();
+			for (User coach : user.coaches())
+				toIds.add(coach.id());
+			for (User student : user.students())
+				fromIds.add(student.id());
+			
+			view.addNode(user.id(),user.version(), toIds, fromIds);
 		}
 		
 		ViewerPipe fromViewer = viewer.newViewerPipe();
@@ -71,6 +74,7 @@ public class InfectionController implements GraphController {
 			@Override
 			public void buttonPushed(String id) {
 				// unused as only a release event indicates a complete click
+				// TODO highlight outline of selected node 
 			}
 
 			@Override

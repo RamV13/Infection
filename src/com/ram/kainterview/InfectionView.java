@@ -106,13 +106,18 @@ public class InfectionView extends JFrame implements GraphView {
 	}
 
 	@Override
-	public void addNode(String id, int label, List<String> ids) {
+	public void addNode(String id, int label, List<String> toIds, 
+			List<String> fromIds) {
 		Node node = graph.addNode(id);
 		node.setAttribute("ui.label", label);
-		for (String s : ids) {
+		
+		for (String s : toIds)
 			if (graph.getNode(s) != null)
-				graph.addEdge(id+s, id, s);
-		}
+				graph.addEdge(s+id, s, id, true);
+		
+		for (String s : fromIds)
+			if (graph.getNode(s) != null)
+				graph.addEdge(id+s, id, s, true);
 	}
 
 	@Override

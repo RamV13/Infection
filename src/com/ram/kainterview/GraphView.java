@@ -27,9 +27,11 @@ public interface GraphView {
 	 * Adds a node to the graph
 	 * @param id the id of the node
 	 * @param label the label of the node
-	 * @param ids the id's of the nodes that are connected to this node
+	 * @param toIds the id's of the nodes that are connected to this node
+	 * @param fromIds the id's of the nodes that are connected from this node
 	 */
-	public void addNode(String id, int label, List<String> ids);
+	public void addNode(String id, int label, List<String> toIds, 
+			List<String> fromIds);
 	
 	/**
 	 * Updates the label of the specified node
