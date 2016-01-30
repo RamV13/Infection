@@ -16,6 +16,9 @@
  */
 package com.ram.kainterview;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.graphstream.graph.Graph;
 import org.graphstream.ui.swingViewer.Viewer;
 import org.graphstream.ui.swingViewer.ViewerListener;
@@ -27,16 +30,36 @@ import org.graphstream.ui.swingViewer.ViewerPipe;
 public class InfectionController implements GraphController {
 
 	/**
+	 * List of all users in the user base
+	 */
+	private List<User> users;
+	
+	/**
 	 * Manages GraphStream's ViewerPipe pump requests
 	 */
 	private boolean loop;
 	
-	public InfectionController() {
+	/**
+	 * Constructs a controller with the given user base
+	 */
+	public InfectionController(List<User> users) {
+		this.users = users;
 		loop = true;
 	}
 	
 	@Override
 	public void init(GraphView view, Graph graph, Viewer viewer) {
+		for (User user : users) {
+			// build ids of adjacent nodes
+			List<String> ids = new LinkedList<String>();
+			for (User coach : user.coaches())
+				ids.add(coach.id());
+			for (User student : user.students())
+				ids.add(student.id());
+			
+			view.addNode(user.id(), user.version(), ids);
+		}
+		
 		ViewerPipe fromViewer = viewer.newViewerPipe();
 		fromViewer.addViewerListener(new ViewerListener() {
 			@Override
