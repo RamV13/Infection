@@ -74,6 +74,8 @@ public class InfectionView extends JFrame implements GraphView {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		initGraph(title);
+		
+		this.setVisible(true);
 	}
 
 	/**
