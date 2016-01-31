@@ -158,4 +158,13 @@ public class User {
 		assert classInv();
 	}
 	
+	/**
+	 * Performs limited infection on this user with the new version number
+	 * @param version the new version number
+	 * @param users the number of users to infect
+	 */
+	public void limitedInfect(int version, int users) {
+		// TODO
+	}
+	
 }
