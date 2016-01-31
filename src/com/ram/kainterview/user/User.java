@@ -141,34 +141,20 @@ public class User {
 	}
 	
 	/**
-	 * Sets the version that this user sees
+	 * Performs total infection on this user with the new version number
 	 * @param version the new version number
 	 */
-	public void setVersion(int version) {
-		assert classInv();
+	public void totalInfect(int version) {
 		this.version = version;
-		infect();
+		for (User coach : coaches)
+			if (coach.version != version)
+				coach.totalInfect(version);
+		
+		for (User student : students)
+			if (student.version != version)
+				student.totalInfect(version);
+		
 		assert classInv();
-	}
-	
-	/**
-	 * Checks the total infection invariant of this class that the version 
-	 * numbers should be equal across all coaches and students of this user and 
-	 * adjusts accordingly by infecting the necessary users
-	 */
-	private void infect() {
-		for (User coach : coaches) {
-			if (coach.version != version) {
-				coach.version = version;
-				coach.infect();
-			}
-		}
-		for (User student : students) {
-			if (student.version != version) {
-				student.version = version;
-				student.infect();
-			}
-		}
 	}
 	
 }

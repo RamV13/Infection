@@ -41,7 +41,7 @@ public class TotalInfectionTest {
 		List<User> users = UserGenerator.generateUsers(1, 0, 1);
 		assertEquals(users.size(),1);
 		User user = users.get(0);
-		user.setVersion(1);
+		user.totalInfect(1);
 		assertEquals(user.version(),1);
 		assertTrue(user.coaches().isEmpty());
 		assertTrue(user.students().isEmpty());
@@ -54,8 +54,8 @@ public class TotalInfectionTest {
 	public void testSpecificInfection() {
 		List<User> users1 = UserGeneratorTest.generateSpecificUsers();
 		List<User> users2 = UserGeneratorTest.generateSpecificUsers();
-		users1.get(0).setVersion(1);
-		users2.get(0).setVersion(1);
+		users1.get(0).totalInfect(1);
+		users2.get(0).totalInfect(1);
 
 		checkUsers(users1);
 		checkUsers(users2);
@@ -82,7 +82,7 @@ public class TotalInfectionTest {
 	public void testBasicInfection() {
 		for (int i = 0; i < 100; i++) {
 			List<User> users = UserGenerator.generateUsers(10, 10, 3);
-			users.get((int) (Math.random()*users.size())).setVersion(1);
+			users.get((int) (Math.random()*users.size())).totalInfect(1);
 			checkUsers(users);
 		}
 	}

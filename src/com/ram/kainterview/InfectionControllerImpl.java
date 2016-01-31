@@ -84,7 +84,7 @@ public class InfectionControllerImpl implements InfectionController {
 
 			@Override
 			public void buttonReleased(String id) {	
-				users.get(id).setVersion(users.get(id).version()+1);
+				users.get(id).totalInfect(users.get(id).version()+1);
 				for (Entry<String,User> entry : users.entrySet())
 					view.updateNode(entry.getKey(), entry.getValue().version());
 			}
