@@ -14,12 +14,15 @@ Performance
 - Disable assertion VM flag for increased performance because class invariant checks can be expensive
 
 Choices
-- Swing because graphing library only supports swing
+- Swing because graphing library only supports swing (with more time UI/UX could be much more refined)
 - Observer pattern for effecting View updates from the Model data changes
 
 - LinkedList vs ArrayList
 - HashMap
 - UUID (practically unique although not guaranteed)
+
+TODO
+- Rather have one student with one version higher rather than one student one version lower (add why?)
 
 TODO UI usage
 
