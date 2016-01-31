@@ -84,7 +84,7 @@ public class InfectionViewImpl extends JFrame implements InfectionView {
 	}
 	
 	/**
-	 * Initializes the menu bar
+	 * Initializes the controls
 	 */
 	private void initControls() {
 		// TODO
