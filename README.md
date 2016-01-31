@@ -37,4 +37,6 @@ TODO recommended parameters
 
 TODO arrow direction convention (coach -> student)
 
+TODO build process (+ branch protection and continuous integration checks before merging branches)
+
 Credit [GraphStream](http://graphstream-project.org/) (graphing library)
