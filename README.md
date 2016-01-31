@@ -29,7 +29,7 @@ JAR download (+fix maven export path)
 TODO
 - Rather have one student with one version higher rather than one student one version lower (add why?)
 
-TODO UI usage
+TODO UI usage (+ TOTAL vs. LIMITED vs. STRICT)
 
 TODO recommended parameters
 
