@@ -142,7 +142,7 @@ public class User {
 	}
 	
 	/**
-	 * Performs total infection on this user with the new version number
+	 * Performs total infection from this user with the new version number
 	 * @param version the new version number
 	 */
 	public void totalInfect(int version) {
