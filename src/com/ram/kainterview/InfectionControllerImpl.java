@@ -101,7 +101,11 @@ public class InfectionControllerImpl implements InfectionController {
 		new Thread(() -> {
 			while (loop) {
 				// request the pipe to check if the viewer thread sent events
-				fromViewer.pump();
+				try {
+					fromViewer.blockingPump();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}).start();
 	}
