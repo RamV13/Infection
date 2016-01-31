@@ -162,18 +162,25 @@ public class User {
 	 * Performs limited infection on this user with the new version number
 	 * @param version the new version number
 	 * @param users the number of users to infect
+	 * @return true if the users connected components are already on the same 
+	 * version (=> terminate infection), false otherwise
 	 */
-	public void limitedInfect(int version, int users) {
-		if (users <= 0) {
-			// TODO decide whether to proceed or return
-			return;
-		}
+	public boolean limitedInfect(int version, int users) {
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
 
 		if (this.version != version) {
 			this.version = version;
 			users--;
 		}
+		
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
 
+		boolean completed = true;
+		
 		for (User student : students) {
 			if (student.version != version) {
 				// only change version if the number of users is not depleted
@@ -182,6 +189,7 @@ public class User {
 				if (users > 0 || users <= 0 && version > student.version) {
 					student.version = version;
 					users--;
+					completed = false;
 				}
 			}
 		}
@@ -191,20 +199,31 @@ public class User {
 			if (coach.version != version && users > 0) {
 				coach.version = version;
 				users--;
+				completed = false;
 			}
 		}
 		
+		// terminate infection if connected components are on the same version
+		if (completed)
+			return true;
+		
 		// terminate infection at this point in graph if # of users is depleted
 		if (users <= 0)
-			return;
+			return true;
 		
-		// continue infect to students first
+		// continue infection to students first
 		for (User student : students)
 			student.limitedInfect(version, users);
+		
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
 
 		// ... then proceed to coaches
 		for (User coach : coaches)
 			coach.limitedInfect(version, users);
+		
+		return false;
 	}
 
 }
