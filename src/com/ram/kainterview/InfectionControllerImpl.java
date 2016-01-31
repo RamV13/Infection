@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
 import org.graphstream.graph.Graph;
 import org.graphstream.ui.view.Viewer;
 import org.graphstream.ui.view.ViewerListener;
@@ -103,4 +106,23 @@ public class InfectionControllerImpl implements InfectionController {
 		}).start();
 	}
 
+	@Override
+	public void registerInfectField(JTextField textField) {
+		// TODO
+	}
+	
+	@Override
+	public void registerInfectButton(JButton button) {
+		button.addActionListener((event) -> {
+			// TODO
+		});
+	}
+
+	@Override
+	public void registerHelpButton(JButton button) {
+		button.addActionListener((event) -> {
+			// TODO
+		});
+	}
+	
 }

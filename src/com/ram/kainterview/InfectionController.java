@@ -16,11 +16,30 @@
  */
 package com.ram.kainterview;
 
+import javax.swing.JButton;
+import javax.swing.JTextField;
+
 /**
- * Interface for the view of the model for infection
+ * Interface for the controller of the model for infection
  */
 public interface InfectionController extends GraphController {
-
 	
+	/**
+	 * Registers the infect text field for the number of users
+	 * @param textField
+	 */
+	public void registerInfectField(JTextField textField);
+	
+	/**
+	 * Registers the infect button
+	 * @param button the infect button
+	 */
+	public void registerInfectButton(JButton button);
+	
+	/**
+	 * Registers the help button
+	 * @param button the help button
+	 */
+	public void registerHelpButton(JButton button);
 	
 }
