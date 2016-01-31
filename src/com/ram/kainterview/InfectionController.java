@@ -37,6 +37,12 @@ public interface InfectionController extends GraphController {
 	public void registerInfectButton(JButton button);
 	
 	/**
+	 * Registers the execute button
+	 * @param button the execute button
+	 */
+	public void registerExecuteButton(JButton button);
+	
+	/**
 	 * Registers the help button
 	 * @param button the help button
 	 */

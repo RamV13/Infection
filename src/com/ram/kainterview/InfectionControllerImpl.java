@@ -125,6 +125,13 @@ public class InfectionControllerImpl implements InfectionController {
 	}
 
 	@Override
+	public void registerExecuteButton(JButton button) {
+		button.addActionListener((event) -> {
+			// TODO (toggle for different infection types)
+		});
+	}
+	
+	@Override	
 	public void registerHelpButton(JButton button) {
 		button.addActionListener((event) -> {
 			// TODO

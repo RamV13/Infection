@@ -22,9 +22,9 @@ package com.ram.kainterview;
 public interface InfectionView extends GraphView {
 
 	/**
-	 * Initializes the GraphController associated with this view
+	 * Initializes the InfectionController associated with this view
 	 * @param controller the controller
 	 */
-	public void initController(GraphController controller);
+	public void initController(InfectionController controller);
 	
 }

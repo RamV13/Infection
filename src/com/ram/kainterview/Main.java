@@ -88,7 +88,7 @@ public class Main {
 			return;
 		}
 		
-		GraphController controller = new InfectionControllerImpl(users);
+		InfectionController controller = new InfectionControllerImpl(users);
 		view.initController(controller);
 	}
 	

@@ -17,12 +17,15 @@
 package com.ram.kainterview;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
@@ -65,6 +68,26 @@ public class InfectionViewImpl extends JFrame implements InfectionView {
 	 * Viewer associated with this graph
 	 */
 	private Viewer viewer;
+	
+	/**
+	 * Infection number text field
+	 */
+	private JTextField infectTextField;
+	
+	/**
+	 * Infection type button
+	 */
+	private JButton infect;
+	
+	/**
+	 * Execute button
+	 */
+	private JButton execute;
+	
+	/**
+	 * Help button
+	 */
+	private JButton help;
 
 	public InfectionViewImpl(String title) {
 		setTitle(title);
@@ -87,14 +110,31 @@ public class InfectionViewImpl extends JFrame implements InfectionView {
 	 * Initializes the controls
 	 */
 	private void initControls() {
-		// TODO
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		
-		JButton b = new JButton();
-		b.setText("Infect");
-		b.setBackground(Color.BLACK);
-		b.setVisible(true);
-		b.setPreferredSize(new Dimension(1,50));
-		this.add(b,BorderLayout.PAGE_START);
+		infectTextField = new JTextField();
+		infectTextField.setPreferredSize(new Dimension(100,50));
+		panel.add(infectTextField);
+		
+		infect = new JButton();
+		infect.setText("Total Infection");
+		infect.setPreferredSize(new Dimension(100,50));
+		panel.add(infect);
+		
+		execute = new JButton();
+		execute.setText("Execute");
+		execute.setPreferredSize(new Dimension(100,50));
+		execute.setVisible(false);
+		panel.add(execute);
+		
+		help = new JButton();
+		help.setText("Help");
+		help.setPreferredSize(new Dimension(100,50));
+		panel.add(help);
+		
+		this.add(panel,BorderLayout.PAGE_START);
 	}
 
 	/**
@@ -124,8 +164,12 @@ public class InfectionViewImpl extends JFrame implements InfectionView {
 	}
 	
 	@Override
-	public void initController(GraphController controller) {
+	public void initController(InfectionController controller) {
 		controller.init(this, graph, viewer);
+		controller.registerInfectField(infectTextField);
+		controller.registerInfectButton(infect);
+		controller.registerExecuteButton(execute);
+		controller.registerHelpButton(help);
 	}
 
 	@Override
