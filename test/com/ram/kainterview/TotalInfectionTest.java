@@ -14,7 +14,7 @@
  * The above copyright notice and this permission notice shall be included in 
  * all copies or substantial portions of the Software.
  */
-package com.ram.kainterview.total_infection;
+package com.ram.kainterview;
 
 import static org.junit.Assert.*;
 
@@ -26,7 +26,6 @@ import org.junit.Test;
 
 import com.ram.kainterview.User;
 import com.ram.kainterview.UserGenerator;
-import com.ram.kainterview.UserGeneratorTest;
 
 /**
  * Test cases for total infection
@@ -41,7 +40,7 @@ public class TotalInfectionTest {
 		List<User> users = UserGenerator.generateUsers(1, 0, 1);
 		assertEquals(users.size(),1);
 		User user = users.get(0);
-		TotalInfection.run(user, 1);
+		user.setVersion(1);
 		assertEquals(user.version(),1);
 		assertTrue(user.coaches().isEmpty());
 		assertTrue(user.students().isEmpty());
@@ -54,8 +53,8 @@ public class TotalInfectionTest {
 	public void testSpecificInfection() {
 		List<User> users1 = UserGeneratorTest.generateSpecificUsers();
 		List<User> users2 = UserGeneratorTest.generateSpecificUsers();
-		TotalInfection.run(users1.get(0),1);
-		TotalInfection.run(users2.get(0),1);
+		users1.get(0).setVersion(1);
+		users2.get(0).setVersion(1);
 
 		checkUsers(users1);
 		checkUsers(users2);
@@ -82,7 +81,7 @@ public class TotalInfectionTest {
 	public void testBasicInfection() {
 		for (int i = 0; i < 100; i++) {
 			List<User> users = UserGenerator.generateUsers(10, 10, 3);
-			TotalInfection.run(users.get((int) (Math.random()*users.size())),1);
+			users.get((int) (Math.random()*users.size())).setVersion(1);
 			checkUsers(users);
 		}
 	}
