@@ -14,7 +14,7 @@
  * The above copyright notice and this permission notice shall be included in 
  * all copies or substantial portions of the Software.
  */
-package com.ram.kainterview;
+package com.ram.kainterview.user;
 
 import static org.junit.Assert.*;
 
@@ -23,6 +23,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Test;
+
+import com.ram.kainterview.user.User;
+import com.ram.kainterview.user.UserGenerator;
 
 /**
  * Test cases for the user base generation

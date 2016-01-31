@@ -18,6 +18,9 @@ package com.ram.kainterview;
 
 import java.util.List;
 
+import com.ram.kainterview.user.User;
+import com.ram.kainterview.user.UserGenerator;
+
 /**
  * Initializes the application, reads user arguments, and performs the 
  * appropriate infection type (total/limited)

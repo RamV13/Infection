@@ -30,6 +30,8 @@ import org.graphstream.ui.view.Viewer;
 import org.graphstream.ui.view.ViewerListener;
 import org.graphstream.ui.view.ViewerPipe;
 
+import com.ram.kainterview.user.User;
+
 /**
  * Controller of the infection model
  */

@@ -24,8 +24,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.ram.kainterview.User;
-import com.ram.kainterview.UserGenerator;
+import com.ram.kainterview.user.User;
+import com.ram.kainterview.user.UserGenerator;
+import com.ram.kainterview.user.UserGeneratorTest;
 
 /**
  * Test cases for total infection
