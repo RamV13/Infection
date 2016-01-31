@@ -28,6 +28,7 @@ JAR download (+fix maven export path)
 
 TODO
 - Rather have one student with one version higher rather than one student one version lower (add why?)
+- Infection is not counted for users that are already on that version
 
 TODO 
 - How to run
