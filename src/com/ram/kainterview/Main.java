@@ -73,7 +73,7 @@ public class Main {
 			return;
 		}
 		
-		GraphView view = new InfectionView("Infection");
+		InfectionView view = new InfectionViewImpl("Infection");
 		
 		List<User> users;
 		try {
@@ -85,7 +85,7 @@ public class Main {
 			return;
 		}
 		
-		GraphController controller = new InfectionController(users);
+		GraphController controller = new InfectionControllerImpl(users);
 		view.initController(controller);
 	}
 	

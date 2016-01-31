@@ -40,10 +40,4 @@ public interface GraphView {
 	 */
 	public void updateNode(String id, int label);
 	
-	/**
-	 * Initializes the GraphController associated with this view
-	 * @param controller the controller
-	 */
-	public void initController(GraphController controller);
-	
 }
