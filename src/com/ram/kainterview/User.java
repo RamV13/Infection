@@ -23,7 +23,8 @@ import java.util.UUID;
 
 /**
  * Represents an individual user of the software
- * Invariant: version number of this user and all coaches and students are equal
+ * Total Infection Invariant: version number of this user and all coaches and 
+ * students are equal
  */
 public class User {
 	
@@ -61,8 +62,8 @@ public class User {
 	}
 	
 	/**
-	 * Checks the invariant of this class that the version numbers should be
-	 * equal across all coaches and students of this user
+	 * Checks the total infection invariant of this class that the version 
+	 * numbers should be equal across all coaches and students of this user
 	 * @return true of the invariant holds, false otherwise
 	 */
 	private boolean classInv() {
@@ -151,9 +152,9 @@ public class User {
 	}
 	
 	/**
-	 * Checks the invariant of this class that the version numbers should be
-	 * equal across all coaches and students of this user and adjusts 
-	 * accordingly by infecting the necessary users
+	 * Checks the total infection invariant of this class that the version 
+	 * numbers should be equal across all coaches and students of this user and 
+	 * adjusts accordingly by infecting the necessary users
 	 */
 	private void infect() {
 		for (User coach : coaches) {
