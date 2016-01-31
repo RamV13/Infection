@@ -17,12 +17,13 @@
 package com.ram.kainterview;
 
 /**
- * List of potential errors from invalid arguments
+ * List of potential errors from invalid user inputs
  */
 public enum Error {
 	MIN_USERS("<MINIMUM_USERS> must be > 0"),
 	MAX_STUDENTS("<MAXIMUM_STUDENTS> must be >= 0"),
-	LEVELS("<LEVELS> must be > 0");
+	LEVELS("<LEVELS> must be > 0"),
+	NUM_USERS("Number of users must be >= 0");
 	
 	/**
 	 * Message for the error

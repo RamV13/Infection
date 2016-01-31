@@ -113,7 +113,25 @@ public class InfectionControllerImpl implements InfectionController {
 								entry.getValue().version());
 					break;
 				case LIMITED:
-					// TODO
+					int num = 0;
+					try {
+						// read number of users from text field
+						num = Integer.parseInt(
+								infectTextField.getText().toString());
+						if (num < 0)
+							JOptionPane.showMessageDialog(new JFrame(), 
+									Error.NUM_USERS.toString(),"Error",
+									JOptionPane.ERROR_MESSAGE);
+					} catch (NumberFormatException e) {
+						JOptionPane.showMessageDialog(new JFrame(), 
+								Error.NUM_USERS.toString(),"Error",
+								JOptionPane.ERROR_MESSAGE);
+						break;
+					}
+					users.get(id).limitedInfect(users.get(id).version()+1, num);
+					for (Entry<String,User> entry : users.entrySet())
+						view.updateNode(entry.getKey(), 
+								entry.getValue().version());
 					break;
 				case STRICT:
 					JOptionPane.showMessageDialog(new JFrame(), "In strict "
@@ -148,7 +166,7 @@ public class InfectionControllerImpl implements InfectionController {
 			}
 		}).start();
 	}
-
+	
 	@Override
 	public void registerInfectField(JTextField infectTextField) {
 		this.infectTextField = infectTextField;

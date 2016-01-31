@@ -28,29 +28,29 @@ import java.util.UUID;
  * students are equal
  */
 public class User {
-	
+
 	/**
 	 * Version that this user sees (base version = 0)
 	 */
 	private int version;
-	
+
 	/**
 	 * Unique identifier for this user
 	 */
 	private String id;
-	
+
 	/**
 	 * Contains all of the coaches of this user.
 	 * This List is empty if the user is not a student of any coaches.
 	 */
 	private List<User> coaches;
-	
+
 	/**
 	 * Contains all the students of this user.
 	 * This List is empty if this user is not a coach of any students.
 	 */
 	private List<User> students;
-	
+
 	/**
 	 * Default constructor of a user with the base version and no students or 
 	 * coaches
@@ -61,7 +61,7 @@ public class User {
 		coaches = new LinkedList<>();
 		students = new LinkedList<>();
 	}
-	
+
 	/**
 	 * Checks the total infection invariant of this class that the version 
 	 * numbers should be equal across all coaches and students of this user
@@ -76,7 +76,7 @@ public class User {
 				return false;
 		return true;
 	}
-	
+
 	/**
 	 * Adds a coach to this user
 	 * @param coach the coach
@@ -84,7 +84,7 @@ public class User {
 	protected void addCoach(User coach) {
 		coaches.add(coach);
 	}
-	
+
 	/**
 	 * Adds a student to this user
 	 * @param student the student
@@ -92,7 +92,7 @@ public class User {
 	protected void addStudent(User student) {
 		students.add(student);
 	}
-	
+
 	/**
 	 * Gets a read-only version of the list of coaches
 	 * @return the list of coaches
@@ -100,7 +100,7 @@ public class User {
 	public List<User> coaches() {
 		return Collections.unmodifiableList(coaches);
 	}
-	
+
 	/**
 	 * Gets a read-only version of the list of students
 	 * @return the list of students
@@ -108,7 +108,7 @@ public class User {
 	public List<User> students() {
 		return Collections.unmodifiableList(students);
 	}
-	
+
 	/**
 	 * Gets the number of coaches for this user
 	 * @return the number of coaches
@@ -116,7 +116,7 @@ public class User {
 	protected int numCoaches() {
 		return coaches.size();
 	}
-	
+
 	/**
 	 * Gets the number of students for this user
 	 * @return the number of students
@@ -124,7 +124,7 @@ public class User {
 	protected int numStudents() {
 		return students.size();
 	}
-	
+
 	/**
 	 * Gets the id of this user
 	 * @return the id
@@ -132,7 +132,7 @@ public class User {
 	public String id() {
 		return id;
 	}
-	
+
 	/**
 	 * Gets the version that this user sees
 	 * @return the version number
@@ -140,9 +140,9 @@ public class User {
 	public int version() {
 		return version;
 	}
-	
+
 	/**
-	 * Performs total infection on this user with the new version number
+	 * Performs total infection from this user with the new version number
 	 * @param version the new version number
 	 */
 	public void totalInfect(int version) {
@@ -150,12 +150,84 @@ public class User {
 		for (User coach : coaches)
 			if (coach.version != version)
 				coach.totalInfect(version);
-		
+
 		for (User student : students)
 			if (student.version != version)
 				student.totalInfect(version);
-		
+
 		assert classInv();
 	}
-	
+
+	/**
+	 * Performs limited infection on this user with the new version number
+	 * @param version the new version number
+	 * @param users the number of users to infect
+	 * @return true if the users connected components are already on the same 
+	 * version (=> terminate infection), false otherwise
+	 */
+	public boolean limitedInfect(int version, int users) {
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
+
+		if (this.version != version) {
+			this.version = version;
+			users--;
+		}
+		
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
+
+		boolean completed = true;
+		
+		for (User student : students) {
+			if (student.version != version) {
+				// only change version if the number of users is not depleted
+				// OR the version change is an upgrade because we do not want 
+				// students to be left out of upgrades (see README).
+				if (users > 0 || users <= 0 && version > student.version) {
+					student.version = version;
+					users--;
+					completed = false;
+				}
+			}
+		}
+		
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
+		
+		for (User coach : coaches) {
+			// only change version if the number of users is not depleted
+			if (coach.version != version && users > 0) {
+				coach.version = version;
+				users--;
+				completed = false;
+			}
+		}
+		
+		// terminate infection if connected components are on the same version
+		if (completed)
+			return true;
+		
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
+		
+		// continue infection to students first
+		for (User student : students)
+			student.limitedInfect(version, users);
+		
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
+
+		// ... then proceed to coaches
+		for (User coach : coaches)
+			coach.limitedInfect(version, users);
+		
+		return false;
+	}
+
 }
