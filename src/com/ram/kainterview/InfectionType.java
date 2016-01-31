@@ -16,36 +16,21 @@
  */
 package com.ram.kainterview;
 
-import javax.swing.JButton;
-import javax.swing.JTextField;
-
 /**
- * Interface for the controller of the model for infection
+ * Lists the various infection types
+ * TOTAL = total infection
+ * LIMITED = limited infection
+ * STRICT = limited infection with an EXACT number of users
  */
-public interface InfectionController extends GraphController {
+public enum InfectionType {
+	TOTAL("Total Infection"), LIMITED("Limited Infection"), 
+	STRICT("Strict Limited Infection");
 	
-	/**
-	 * Registers the infect text field for the number of users
-	 * @param infectTextField
-	 */
-	public void registerInfectField(JTextField infectTextField);
-	
-	/**
-	 * Registers the infect button
-	 * @param infect the infect button
-	 */
-	public void registerInfectButton(JButton infect);
-	
-	/**
-	 * Registers the execute button
-	 * @param execute the execute button
-	 */
-	public void registerExecuteButton(JButton execute);
-	
-	/**
-	 * Registers the help button
-	 * @param help the help button
-	 */
-	public void registerHelpButton(JButton help);
-	
+	private String s;
+	private InfectionType(String s) {
+		this.s = s;
+	}
+	public String toString() {
+		return s;
+	}
 }

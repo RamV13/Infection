@@ -115,12 +115,13 @@ public class InfectionViewImpl extends JFrame implements InfectionView {
 		panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		
 		infectTextField = new JTextField();
-		infectTextField.setPreferredSize(new Dimension(100,50));
+		infectTextField.setPreferredSize(new Dimension(150,50));
+		infectTextField.setVisible(false);
 		panel.add(infectTextField);
 		
 		infect = new JButton();
 		infect.setText("Total Infection");
-		infect.setPreferredSize(new Dimension(100,50));
+		infect.setPreferredSize(new Dimension(200,50));
 		panel.add(infect);
 		
 		execute = new JButton();

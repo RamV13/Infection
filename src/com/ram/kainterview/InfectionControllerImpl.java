@@ -16,6 +16,9 @@
  */
 package com.ram.kainterview;
 
+import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +26,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import org.graphstream.graph.Graph;
@@ -41,12 +46,27 @@ public class InfectionControllerImpl implements InfectionController {
 	 * Map of all id's to users in the user base
 	 */
 	private Map<String,User> users;
-	
+
 	/**
 	 * Manages GraphStream's ViewerPipe pump requests
 	 */
 	private boolean loop;
-	
+
+	/**
+	 * Infection number text field
+	 */
+	private JTextField infectTextField;
+
+	/**
+	 * Execute button
+	 */
+	private JButton execute;
+
+	/**
+	 * Keeps track of the current infection type
+	 */
+	private InfectionType type;
+
 	/**
 	 * Constructs a controller with the given user base
 	 */
@@ -54,15 +74,16 @@ public class InfectionControllerImpl implements InfectionController {
 		this.users = new HashMap<>();
 		for (User user : users)
 			this.users.put(user.id(), user);
-		
-		loop = true;
+
+		type = InfectionType.TOTAL; // default infection type
+		loop = true; // enable graph rendering
 	}
-	
+
 	@Override
 	public void init(GraphView view, Graph graph, Viewer viewer) {
 		for (Entry<String,User> entry : users.entrySet()) {
 			User user = entry.getValue();
-			
+
 			// build ids of adjacent nodes
 			List<String> toIds = new LinkedList<String>();
 			List<String> fromIds = new LinkedList<String>();
@@ -70,10 +91,10 @@ public class InfectionControllerImpl implements InfectionController {
 				toIds.add(coach.id());
 			for (User student : user.students())
 				fromIds.add(student.id());
-			
+
 			view.addNode(user.id(),user.version(), toIds, fromIds);
 		}
-		
+
 		ViewerPipe fromViewer = viewer.newViewerPipe();
 		fromViewer.addViewerListener(new ViewerListener() {
 			@Override
@@ -83,10 +104,26 @@ public class InfectionControllerImpl implements InfectionController {
 			}
 
 			@Override
-			public void buttonReleased(String id) {	
-				users.get(id).totalInfect(users.get(id).version()+1);
-				for (Entry<String,User> entry : users.entrySet())
-					view.updateNode(entry.getKey(), entry.getValue().version());
+			public void buttonReleased(String id) {
+				switch(type) {
+				case TOTAL:
+					users.get(id).totalInfect(users.get(id).version()+1);
+					for (Entry<String,User> entry : users.entrySet())
+						view.updateNode(entry.getKey(), 
+								entry.getValue().version());
+					break;
+				case LIMITED:
+					// TODO
+					break;
+				case STRICT:
+					JOptionPane.showMessageDialog(new JFrame(), "In strict "
+							+ "limited infection mode,\ninfection can only be "
+							+ "performed\nby pressing the 'Execute' button.\n\n"
+							+ "See the 'Help' section for more information.", 
+							"Warning", JOptionPane.WARNING_MESSAGE);
+					break;
+				default: assert false; // should never occur
+				}
 			}
 
 			@Override
@@ -113,29 +150,78 @@ public class InfectionControllerImpl implements InfectionController {
 	}
 
 	@Override
-	public void registerInfectField(JTextField textField) {
-		// TODO
-	}
-	
-	@Override
-	public void registerInfectButton(JButton button) {
-		button.addActionListener((event) -> {
-			// TODO (toggle for different infection types)
+	public void registerInfectField(JTextField infectTextField) {
+		this.infectTextField = infectTextField;
+		
+		// hint for text field
+		infectTextField.setText("# of users to infect");
+		infectTextField.setForeground(Color.GRAY);
+		infectTextField.addFocusListener(new FocusListener() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (infectTextField.getText().equals("# of users to infect")) {
+					infectTextField.setText("");
+					infectTextField.setForeground(Color.BLACK);
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (infectTextField.getText().equals("")) {
+					infectTextField.setText("# of users to infect");
+					infectTextField.setForeground(Color.GRAY);
+				}
+			}
 		});
 	}
 
 	@Override
-	public void registerExecuteButton(JButton button) {
-		button.addActionListener((event) -> {
+	public void registerInfectButton(JButton infect) {
+		infect.addActionListener((event) -> {
+			switch (type) {
+			case TOTAL:
+				type = InfectionType.LIMITED;
+				infect.setText("Limited Infection");
+				infectTextField.setVisible(true);
+				break;
+			case LIMITED:
+				type = InfectionType.STRICT;
+				infect.setText("Strict Limited Infection");
+				execute.setVisible(true);
+				break;
+			case STRICT:
+				type = InfectionType.TOTAL;
+				infect.setText("Total Infection");
+				execute.setVisible(false);
+				infectTextField.setVisible(false);
+				break;
+			default: assert false; // should never occur
+			}
+		});
+	}
+
+	@Override
+	public void registerExecuteButton(JButton execute) {
+		this.execute = execute;
+		execute.addActionListener((event) -> {
+			assert type.equals(InfectionType.STRICT);
 			// TODO
 		});
 	}
-	
+
 	@Override	
-	public void registerHelpButton(JButton button) {
-		button.addActionListener((event) -> {
-			// TODO
+	public void registerHelpButton(JButton help) {
+		help.addActionListener((event) -> {
+			JOptionPane.showMessageDialog(help, "Click the '"+type.toString()
+			+ "' button to toggle between infection types.\nPress any "
+			+ "node (represents a user) to infect from that user.\nFor "
+			+ "limited infection, enter the number of users to be "
+			+ "infected \nbefore selecting a node. However, when using"
+			+ "strict limited \ninfection, the application will "
+			+ "automatically attempt the infection\nupon pressing the "
+			+ "'Execute' button.\n\nFor information, visit "
+			+ "https://github.com/RamV13/Infection", "Help", 
+			JOptionPane.PLAIN_MESSAGE);
 		});
 	}
-	
+
 }
