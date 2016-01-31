@@ -16,9 +16,12 @@
  */
 package com.ram.kainterview;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import org.graphstream.graph.Graph;
@@ -73,9 +76,25 @@ public class InfectionView extends JFrame implements GraphView {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		initControls();
+		
 		initGraph(title);
 		
 		this.setVisible(true);
+	}
+	
+	/**
+	 * Initializes the menu bar
+	 */
+	private void initControls() {
+		// TODO
+		
+		JButton b = new JButton();
+		b.setText("Infect");
+		b.setBackground(Color.BLACK);
+		b.setVisible(true);
+		b.setPreferredSize(new Dimension(1,50));
+		this.add(b,BorderLayout.PAGE_START);
 	}
 
 	/**
@@ -100,7 +119,8 @@ public class InfectionView extends JFrame implements GraphView {
 		DefaultView view = (DefaultView) viewer.addDefaultView(false);
 		view.getCamera().setAutoFitView(true);
 		view.getCamera().resetView();
-		this.add(view);
+		
+		this.add(view,BorderLayout.CENTER);
 	}
 	
 	@Override
