@@ -27,7 +27,7 @@ Javadoc
 JAR download (+fix maven export path)
 
 TODO
-- Rather have one student with one version higher rather than one student one version lower (add why?)
+- Rather have one student with one version higher rather than one student one version lower (add why?) (+students have higher priority than coaches)
 - Infection is not counted for users that are already on that version
 
 TODO 
