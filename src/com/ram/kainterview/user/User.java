@@ -194,6 +194,10 @@ public class User {
 			}
 		}
 		
+		// terminate infection at this point in graph if # of users is depleted
+		if (users <= 0)
+			return true;
+		
 		for (User coach : coaches) {
 			// only change version if the number of users is not depleted
 			if (coach.version != version && users > 0) {
