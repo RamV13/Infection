@@ -6,6 +6,10 @@ An implementation of a model for user versioning focused on managing new feature
 ### UI Inspiration
 - Graph color scheme was based off the Khan Academy knowledge map
 
+### Code Style
+- Complete Javadoc documentation (viewable [here](http://ramvellanki.com/infection/doc/))
+- 80 character limit
+
 ### Usage
 ##### How to run
 - Download the JAR by selecting `Infection-1.0.0.jar` in the project directory above and then selecting `View Raw`
@@ -58,9 +62,6 @@ An implementation of a model for user versioning focused on managing new feature
 
 ### Build Process
 - Used [Travis CI](https://travis-ci.org/) for continuous integration
+- Used Maven in order to integrate with [Travis CI](https://travis-ci.org/) as well as simplify dependency management
 - Used Github's branch protection to enforce status checks (with [Travis CI](https://travis-ci.org/)) before merging other branches into **master**
 - Also used branch protection to prevent force pushes from Git
-
-### Code Style
-- 80 character limit
-- Complete Javadoc documentation (viewable [here](http://ramvellanki.com/infection/doc/))
