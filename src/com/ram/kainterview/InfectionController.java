@@ -26,7 +26,7 @@ public interface InfectionController extends GraphController {
 	
 	/**
 	 * Registers the infect text field for the number of users
-	 * @param infectTextField
+	 * @param infectTextField the text field for the number of users
 	 */
 	public void registerInfectField(JTextField infectTextField);
 	
