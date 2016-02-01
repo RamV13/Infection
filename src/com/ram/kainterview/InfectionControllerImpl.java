@@ -281,7 +281,7 @@ public class InfectionControllerImpl implements InfectionController {
 			+ "' button to toggle between infection types.\nPress any "
 			+ "node (represents a user) to infect from that user.\nFor "
 			+ "limited infection, enter the number of users to be "
-			+ "infected \nbefore selecting a node. However, when using"
+			+ "infected \nbefore selecting a node. However, when using "
 			+ "strict limited \ninfection, the application will "
 			+ "automatically attempt the infection\nupon pressing the "
 			+ "'Execute' button.\n\nFor information, visit "
