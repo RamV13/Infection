@@ -45,11 +45,11 @@ public class Main {
 		System.out.println(USAGE);
 		System.out.println();
 		System.out.println("<MINIMUM_USERS>: the minimum number of users in the"
-				+ " user base");
+				+ " user base (integer)");
 		System.out.println("<MAXIMUM_STUDENTS>: the maximum number of students "
-				+ "per user");
+				+ "per user (integer)");
 		System.out.println("<LEVELS>: the levels of coach-student relationships"
-				+ " to generate");
+				+ " to generate (integer)");
 	}
 	
 	/**
