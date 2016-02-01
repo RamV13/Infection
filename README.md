@@ -4,11 +4,18 @@
 An implementation of a model for user versioning focused on managing new feature rollouts while preserving the invariant that all pairs should ideally be on the same version.
 
 ### UI Inspiration
-- Graph color scheme was based off the Kkan Academy knowledge map
+- Graph color scheme was based off the Khan Academy knowledge map
 
 ### Usage
 ##### How to run
 - Use the command `java -jar Infection-1.0.0.jar <MINIMUM_USERS> <MAXIMUM_STUDENTS> <LEVELS>`
+
+      `<MINIMUM_USERS>`: the minimum number of users in the user base
+      
+      `<MAXIMUM_STUDENTS>`: the maximum number of students per user
+      
+      `<LEVELS>`: the maximum number of levels of coach-student relationships
+      
 - Recommended parameters (because of the UI limitation):
 
       `<MINIMUM_USERS>`: <= 10
@@ -18,6 +25,8 @@ An implementation of a model for user versioning focused on managing new feature
       `<LEVELS>`: <= 3
   
   The model itself can support much higher values (with the exception of the strict limited infection extension which is slow and cannot function beyond 15, 15, and 3 for the above parameters)
+  
+###### Note: this application was developed on Java 8
 
 ##### How to use
 - Each node in the graph represents a user and the number enclosed is the version number of that user
@@ -48,7 +57,7 @@ An implementation of a model for user versioning focused on managing new feature
 
 ### Build Process
 - Used [Travis CI](https://travis-ci.org/) for continuous integration
-- Used branch protection to enforce status checks (with [Travis CI](https://travis-ci.org/)) before merging other branches into **master**
+- Used Github's branch protection to enforce status checks (with [Travis CI](https://travis-ci.org/)) before merging other branches into **master**
 - Also used branch protection to prevent force pushes from Git
 
 ### Code Style
