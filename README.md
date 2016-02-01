@@ -9,6 +9,13 @@ An implementation of a model for user versioning focused on managing new feature
 ### Usage
 ##### How to run
 - Use the command `java -jar Infection-1.0.0.jar <MINIMUM_USERS> <MAXIMUM_STUDENTS> <LEVELS>`
+
+      `<MINIMUM_USERS>`: the minimum number of users in the user base
+      
+      `<MAXIMUM_STUDENTS>`: the maximum number of students per user
+      
+      `<LEVELS>`: the maximum number of levels of coach-student relationships
+      
 - Recommended parameters (because of the UI limitation):
 
       `<MINIMUM_USERS>`: <= 10
