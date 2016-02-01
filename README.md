@@ -34,7 +34,7 @@ TODO
 - How to run
 - UI usage (+ TOTAL vs. LIMITED vs. STRICT)
 
-TODO recommended parameters
+TODO recommended parameters (+ strict limited infection fails beyond 15 15 3 because it is slow)
 
 TODO arrow direction convention (coach -> student)
 
