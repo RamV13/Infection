@@ -4,6 +4,7 @@
 # Except ...
 !/src/
 !/test/
+!/doc/
 !.gitignore
 !pom.xml
 !.travis.yml
