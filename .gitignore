@@ -8,4 +8,5 @@
 !.gitignore
 !pom.xml
 !.travis.yml
+!Infection-1.0.0.jar
 
