@@ -1,5 +1,5 @@
 /**
- * Package for the users of the infection implementations for the Khan Academy 
+ * Package for the users in the infection implementations for the Khan Academy 
  * interview
  * 
  * The MIT License (MIT)
