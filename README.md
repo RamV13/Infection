@@ -4,13 +4,28 @@
 An implementation of a model for user versioning focused on managing new feature rollouts while preserving the invariant that all pairs should ideally be on the same version.
 
 ### UI Inspiration
-- Graph color scheme was based off Kkan Academy knowledge map
+- Graph color scheme was based off the Kkan Academy knowledge map
 
-### How to Run/Use
-- TODO recommended parameters (+ strict limited infection fails beyond 15 15 3 because it is slow)
-- TODO UI usage (+ TOTAL vs. LIMITED vs. STRICT)
-- TODO Clicking node/Execute => single upgrade
-- All arrows are directed from coaches to students
+### Usage
+##### How to run
+- Use the command `java -jar Infection-1.0.0.jar <MINIMUM_USERS> <MAXIMUM_STUDENTS> <LEVELS>`
+- Recommended parameters (because of the UI limitation):
+
+      `<MINIMUM_USERS>`: <= 10
+      
+      `<MAXIMUM_STUDENTS>`: <=10
+      
+      `<LEVELS>`: <= 3
+  
+  The model itself can support much higher values (with the exception of the strict limited infection extension which is slow and cannot function beyond 15, 15, and 3 for the above parameters)
+
+##### How to use
+- Each node in the graph represents a user and the number enclosed is the version number of that user
+- Clicking a node upgrades the version number by 1 starting from that user.
+- For limited infection, the number of users to infect must be specified in the text field.
+- For strict limited infection, clicking a node does not upgrade the version number. Rather, the `Execute` button upgrades the version number, because the user to start from is decided by the application depending on the specified number of users to infect.
+- In order to toggle between the different types of infection, just click the button that displays the current infection type (i.e. the button that starts with the text `Total Infection`)
+- Note: all arrows in the graph are directed from coaches to students
 
 ### Performance
 - Disable assertion VM flag (-ea) for increased performance because class invariant checks (for total infection) can be expensive
