@@ -63,4 +63,4 @@ An implementation of a model for user versioning focused on managing new feature
 
 ### Code Style
 - 80 character limit
-- Complete Javadoc documentation
+- Complete Javadoc documentation (viewable [here](http://ramvellanki.com/infection/doc/))
