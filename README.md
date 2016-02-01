@@ -18,6 +18,8 @@ An implementation of a model for user versioning focused on managing new feature
       `<LEVELS>`: <= 3
   
   The model itself can support much higher values (with the exception of the strict limited infection extension which is slow and cannot function beyond 15, 15, and 3 for the above parameters)
+  
+###### Note: this application was developed on Java 8
 
 ##### How to use
 - Each node in the graph represents a user and the number enclosed is the version number of that user
