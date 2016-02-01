@@ -6,6 +6,10 @@ An implementation of a model for user versioning focused on managing new feature
 ### UI Inspiration
 - Graph color scheme was based off the Khan Academy knowledge map
 
+### Code Style
+- Complete Javadoc documentation (viewable [here](http://ramvellanki.com/infection/doc/))
+- 80 character limit
+
 ### Usage
 ##### How to run
 - Download the JAR by selecting `Infection-1.0.0.jar` in the project directory above and then selecting `View Raw`
@@ -35,7 +39,7 @@ An implementation of a model for user versioning focused on managing new feature
 - For limited infection, the number of users to infect must be specified in the text field.
 - For strict limited infection, clicking a node does not upgrade the version number. Rather, the `Execute` button upgrades the version number, because the user to start from is decided by the application depending on the specified number of users to infect.
 - In order to toggle between the different types of infection, just click the button that displays the current infection type (i.e. the button that starts with the text `Total Infection`)
-- Note: all arrows in the graph are directed from coaches to students
+- Note: all arrows in the graph are directed from teachers to students
 
 ### Performance
 - Disable the assertion Java VM flag (-ea) for increased performance because class invariant checks (for total infection) can be expensive
@@ -47,20 +51,17 @@ An implementation of a model for user versioning focused on managing new feature
 - Implemented Model-View-Controller design pattern to separate the various concerns of the application
 
 ##### Performance
-- Used a LinkedList vs. ArrayList depending on the usage in the code because ArrayList's have the additional CPU overhead of resizing. So LinkedList's were appropriate when lookup by index was not required.
-- Used a HashMap to map nodes in the graph (View) to the users (Model) because of the *O*(1) lookup time
-- Used a UUID (practically unique although not guaranteed) as the key to identify users in the Map
+- Used a LinkedList vs. ArrayList depending on the usage in the code because ArrayList's have the additional overhead of resizing. So LinkedList's were appropriate when lookup by index was not required.
+- Used a HashMap to map nodes in the graph (View) to the users (Model) because of the *O*(1) lookup time. A UUID (practically unique although not guaranteed) serves as the key to identify users in the Map
 - One drawback is that all node labels (the version numbers) in the graph are redrawn any time an infection is performed because a mechanism for keeping track of which nodes were changed was not implemented (this could simply be done by the `User` object notifying an observer any time the version number changes where the observer then informs the graph to redraw the node label)
 
 ##### Specification
-- For limited infection, one of the decisions was that it would be better to have a coach on a higher version than a student in order to address the concern mentioned in the project specification that younger individuals cannot understand the concept of versioning and would not like to see different versions of a site. Thus, infecting students was prioritized over infecting coaches.
+- For limited infection, one of the decisions was that it would be better to have a coach on a higher version than a student rather than the other way around in order to address the concern mentioned in the project specification that younger individuals cannot understand the concept of versioning and would not like to see different versions of a site. Thus, infecting students was prioritized over infecting coaches.
 - Additionally, infection is not counted for users that are already on the version being upgraded to (ex. if there exists a graph of 4 users where one of the users is already on the next version, then applying limited infection (strict or not) will result in all of the users on the same version.
+- User relations in the graph also support the idea that students may, in fact, coach their teachers (or even their teacher's teacher) possibly in different subjects based on expertise.
 
 ### Build Process
 - Used [Travis CI](https://travis-ci.org/) for continuous integration
+- Used Maven in order to integrate with [Travis CI](https://travis-ci.org/) as well as simplify dependency management
 - Used Github's branch protection to enforce status checks (with [Travis CI](https://travis-ci.org/)) before merging other branches into **master**
 - Also used branch protection to prevent force pushes from Git
-
-### Code Style
-- 80 character limit
-- Complete Javadoc documentation
