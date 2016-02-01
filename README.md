@@ -4,7 +4,7 @@
 An implementation of a model for user versioning focused on managing new feature rollouts while preserving the invariant that all pairs should ideally be on the same version.
 
 ### UI Inspiration
-- Graph color scheme was based off the Kkan Academy knowledge map
+- Graph color scheme was based off the Khan Academy knowledge map
 
 ### Usage
 ##### How to run
