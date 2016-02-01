@@ -43,6 +43,11 @@ import com.ram.kainterview.user.User;
 public class InfectionControllerImpl implements InfectionController {
 
 	/**
+	 * View instance to communicate changes to the view
+	 */
+	private GraphView view;
+	
+	/**
 	 * Map of all id's to users in the user base
 	 */
 	private Map<String,User> users;
@@ -81,6 +86,8 @@ public class InfectionControllerImpl implements InfectionController {
 
 	@Override
 	public void init(GraphView view, Graph graph, Viewer viewer) {
+		this.view = view;
+		
 		for (Entry<String,User> entry : users.entrySet()) {
 			User user = entry.getValue();
 
@@ -123,11 +130,11 @@ public class InfectionControllerImpl implements InfectionController {
 								infectTextField.getText().toString());
 						if (num < 0)
 							JOptionPane.showMessageDialog(new JFrame(), 
-									Error.NUM_USERS.toString(),"Error",
+									Error.NUM_USERS,"Error",
 									JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException e) {
 						JOptionPane.showMessageDialog(new JFrame(), 
-								Error.NUM_USERS.toString(),"Error",
+								Error.NUM_USERS,"Error",
 								JOptionPane.ERROR_MESSAGE);
 						break;
 					}
@@ -225,14 +232,50 @@ public class InfectionControllerImpl implements InfectionController {
 		this.execute = execute;
 		execute.addActionListener((event) -> {
 			assert type.equals(InfectionType.STRICT);
-			// TODO
+			
+			boolean completed = false;
+			
+			for (Entry<String,User> entry : users.entrySet()) {
+				User user = entry.getValue();
+				
+				int num = 0;
+				try {
+					// read number of users from text field
+					num = Integer.parseInt(
+							infectTextField.getText().toString());
+					if (num < 0)
+						JOptionPane.showMessageDialog(new JFrame(), 
+								Error.NUM_USERS,"Error",
+								JOptionPane.ERROR_MESSAGE);
+				} catch (NumberFormatException e) {
+					JOptionPane.showMessageDialog(new JFrame(), 
+							Error.NUM_USERS,"Error",
+							JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
+				if (user.graphSize() == num) {
+					user.totalInfect(user.version()+1);
+					completed = true;
+					break;
+				}
+			}
+			
+			if (!completed)
+				JOptionPane.showMessageDialog(new JFrame(), 
+						Error.NO_STRICT,"Error",
+						JOptionPane.ERROR_MESSAGE);
+			else
+				for (Entry<String,User> entry : users.entrySet())
+					view.updateNode(entry.getKey(), entry.getValue().version());
+			
 		});
 	}
 
 	@Override	
 	public void registerHelpButton(JButton help) {
 		help.addActionListener((event) -> {
-			JOptionPane.showMessageDialog(help, "Click the '"+type.toString()
+			JOptionPane.showMessageDialog(new JFrame(), "Click the '"+type
 			+ "' button to toggle between infection types.\nPress any "
 			+ "node (represents a user) to infect from that user.\nFor "
 			+ "limited infection, enter the number of users to be "

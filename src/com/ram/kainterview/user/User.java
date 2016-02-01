@@ -229,5 +229,15 @@ public class User {
 		
 		return false;
 	}
+	
+	/**
+	 * Determines the size of the graph of the users connected to this user as
+	 * coaches or students with a depth-first traversal
+	 * @return the size of the graph
+	 */
+	public int graphSize() {
+		// TODO
+		return 0;
+	}
 
 }

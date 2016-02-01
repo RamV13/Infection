@@ -23,7 +23,8 @@ public enum Error {
 	MIN_USERS("<MINIMUM_USERS> must be > 0"),
 	MAX_STUDENTS("<MAXIMUM_STUDENTS> must be >= 0"),
 	LEVELS("<LEVELS> must be > 0"),
-	NUM_USERS("Number of users must be >= 0");
+	NUM_USERS("Number of users must be >= 0"),
+	NO_STRICT("Not possible to infect exactly this number of users");
 	
 	/**
 	 * Message for the error
