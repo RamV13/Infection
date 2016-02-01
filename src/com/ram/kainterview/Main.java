@@ -22,8 +22,8 @@ import com.ram.kainterview.user.User;
 import com.ram.kainterview.user.UserGenerator;
 
 /**
- * Initializes the application, reads user arguments, and performs the 
- * appropriate infection type (total/limited)
+ * Initializes the application, reads user arguments, and connects the view and
+ * the controller
  */
 public class Main {
 
