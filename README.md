@@ -8,6 +8,7 @@ An implementation of a model for user versioning focused on managing new feature
 
 ### Usage
 ##### How to run
+- Download the JAR by selecting `Infection-1.0.0.jar` in the project directory above and then selecting `View Raw`
 - Use the command `java -jar Infection-1.0.0.jar <MINIMUM_USERS> <MAXIMUM_STUDENTS> <LEVELS>`
 
       `<MINIMUM_USERS>`: the minimum number of users in the user base
