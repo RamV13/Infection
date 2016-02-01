@@ -39,7 +39,7 @@ An implementation of a model for user versioning focused on managing new feature
 - For limited infection, the number of users to infect must be specified in the text field.
 - For strict limited infection, clicking a node does not upgrade the version number. Rather, the `Execute` button upgrades the version number, because the user to start from is decided by the application depending on the specified number of users to infect.
 - In order to toggle between the different types of infection, just click the button that displays the current infection type (i.e. the button that starts with the text `Total Infection`)
-- Note: all arrows in the graph are directed from coaches to students
+- Note: all arrows in the graph are directed from teachers to students
 
 ### Performance
 - Disable the assertion Java VM flag (-ea) for increased performance because class invariant checks (for total infection) can be expensive
