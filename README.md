@@ -4,7 +4,7 @@
 An implementation of a model for user versioning focused on managing new feature rollouts while preserving the invariant that all pairs should ideally be on the same version.
 
 ### UI Inspiration
-- Graph color scheme is based off Kkan Academy knowledge map
+- Graph color scheme was based off Kkan Academy knowledge map
 
 ### How to Run/Use
 - TODO recommended parameters (+ strict limited infection fails beyond 15 15 3 because it is slow)
