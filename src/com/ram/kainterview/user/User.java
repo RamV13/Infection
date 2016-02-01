@@ -18,8 +18,10 @@
 package com.ram.kainterview.user;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -228,6 +230,50 @@ public class User {
 			coach.limitedInfect(version, users);
 		
 		return false;
+	}
+	
+	/**
+	 * Determines the size of the graph of the users connected to this user as
+	 * coaches or students with a depth-first traversal in each direction (both
+	 * to coaches and to students)
+	 * @return the size of the graph
+	 */
+	public int graphSize() {
+		int count = 1;
+		
+		Map<String, User> users = new HashMap<String, User>();
+		users.put(this.id, this);
+		
+		for (User student : students)
+			count+=student.graphSize(users);
+		
+		for (User coach : coaches)
+			count+=coach.graphSize(users);
+		
+		return count;
+	}
+	
+	/**
+	 * Determines the size of the graph of the users connected to this user as
+	 * coaches or students with a depth-first traversal in each direction (both
+	 * to coaches and to students)
+	 * @param users map of users already processed for the graph size
+	 * @return the size of the graph
+	 */
+	private int graphSize(Map<String,User> users) {
+		int count = 1;
+		
+		users.put(this.id, this);
+		
+		for (User student : students)
+			if (!users.containsKey(student.id))
+				count+=student.graphSize(users);
+		
+		for (User coach : coaches)
+			if (!users.containsKey(coach.id))	
+				count+=coach.graphSize(users);
+		
+		return count;
 	}
 
 }
