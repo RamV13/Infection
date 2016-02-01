@@ -165,7 +165,7 @@ public class User {
 	 * @param version the new version number
 	 * @param users the number of users to infect
 	 * @return true if the users connected components are already on the same 
-	 * version (=> terminate infection), false otherwise
+	 * version (i.e. terminate infection), false otherwise
 	 */
 	public boolean limitedInfect(int version, int users) {
 		// terminate infection at this point in graph if # of users is depleted
