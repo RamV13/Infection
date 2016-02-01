@@ -19,9 +19,9 @@ An implementation of a model for user versioning focused on managing new feature
       
 - Recommended parameters (because of the UI limitation):
 
-      `<MINIMUM_USERS>`: <= 10
+      `<MINIMUM_USERS>`: <= 5
       
-      `<MAXIMUM_STUDENTS>`: <=10
+      `<MAXIMUM_STUDENTS>`: <= 5
       
       `<LEVELS>`: <= 3
   
