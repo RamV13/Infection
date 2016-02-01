@@ -58,6 +58,7 @@ An implementation of a model for user versioning focused on managing new feature
 ##### Specification
 - For limited infection, one of the decisions was that it would be better to have a coach on a higher version than a student rather than the other way around in order to address the concern mentioned in the project specification that younger individuals cannot understand the concept of versioning and would not like to see different versions of a site. Thus, infecting students was prioritized over infecting coaches.
 - Additionally, infection is not counted for users that are already on the version being upgraded to (ex. if there exists a graph of 4 users where one of the users is already on the next version, then applying limited infection (strict or not) will result in all of the users on the same version.
+- User relations in the graph also support the idea that students may, in fact, coach their teachers (or even their teacher's teacher) possibly in different subjects based on expertise.
 
 ### Build Process
 - Used [Travis CI](https://travis-ci.org/) for continuous integration
