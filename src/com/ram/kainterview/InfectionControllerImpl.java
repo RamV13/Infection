@@ -74,6 +74,7 @@ public class InfectionControllerImpl implements InfectionController {
 
 	/**
 	 * Constructs a controller with the given user base
+	 * @param users list of all the users in the user base
 	 */
 	public InfectionControllerImpl(List<User> users) {
 		this.users = new HashMap<>();
