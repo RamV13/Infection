@@ -28,7 +28,7 @@ An implementation of a model for user versioning focused on managing new feature
 - Note: all arrows in the graph are directed from coaches to students
 
 ### Performance
-- Disable assertion VM flag (-ea) for increased performance because class invariant checks (for total infection) can be expensive
+- Disable the assertion Java VM flag (-ea) for increased performance because class invariant checks (for total infection) can be expensive
 
 ### Design Choices
 ##### General
@@ -40,6 +40,7 @@ An implementation of a model for user versioning focused on managing new feature
 - Used a LinkedList vs. ArrayList depending on the usage in the code because ArrayList's have the additional CPU overhead of resizing. So LinkedList's were appropriate when lookup by index was not required.
 - Used a HashMap to map nodes in the graph (View) to the users (Model) because of the *O*(1) lookup time
 - Used a UUID (practically unique although not guaranteed) as the key to identify users in the Map
+- One drawback is that all node labels (the version numbers) in the graph are redrawn any time an infection is performed because a mechanism for keeping track of which nodes were changed was not implemented (this could simply be done by the `User` object notifying an observer any time the version number changes where the observer then informs the graph to redraw the node label)
 
 ##### Specification
 - For limited infection, one of the decisions was that it would be better to have a coach on a higher version than a student in order to address the concern mentioned in the project specification that younger individuals cannot understand the concept of versioning and would not like to see different versions of a site. Thus, infecting students was prioritized over infecting coaches.
