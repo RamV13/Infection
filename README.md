@@ -48,7 +48,7 @@ An implementation of a model for user versioning focused on managing new feature
 
 ### Build Process
 - Used [Travis CI](https://travis-ci.org/) for continuous integration
-- Used branch protection to enforce status checks (with [Travis CI](https://travis-ci.org/)) before merging other branches into **master**
+- Used Github's branch protection to enforce status checks (with [Travis CI](https://travis-ci.org/)) before merging other branches into **master**
 - Also used branch protection to prevent force pushes from Git
 
 ### Code Style
