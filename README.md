@@ -51,7 +51,7 @@ An implementation of a model for user versioning focused on managing new feature
 - Implemented Model-View-Controller design pattern to separate the various concerns of the application
 
 ##### Performance
-- Used a LinkedList vs. ArrayList depending on the usage in the code because ArrayList's have the additional CPU overhead of resizing. So LinkedList's were appropriate when lookup by index was not required.
+- Used a LinkedList vs. ArrayList depending on the usage in the code because ArrayList's have the additional overhead of resizing. So LinkedList's were appropriate when lookup by index was not required.
 - Used a HashMap to map nodes in the graph (View) to the users (Model) because of the *O*(1) lookup time
 - Used a UUID (practically unique although not guaranteed) as the key to identify users in the Map
 - One drawback is that all node labels (the version numbers) in the graph are redrawn any time an infection is performed because a mechanism for keeping track of which nodes were changed was not implemented (this could simply be done by the `User` object notifying an observer any time the version number changes where the observer then informs the graph to redraw the node label)
