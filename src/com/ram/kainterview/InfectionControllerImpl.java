@@ -99,12 +99,15 @@ public class InfectionControllerImpl implements InfectionController {
 		fromViewer.addViewerListener(new ViewerListener() {
 			@Override
 			public void buttonPushed(String id) {
-				// unused as only a release event indicates a complete click
-				// TODO highlight outline of selected node 
+				// add outline highlight on select
+				graph.getNode(id).addAttribute("ui.class", "selected");
 			}
 
 			@Override
 			public void buttonReleased(String id) {
+				// remove highlighting on release
+				graph.getNode(id).removeAttribute("ui.class");
+				
 				switch(type) {
 				case TOTAL:
 					users.get(id).totalInfect(users.get(id).version()+1);

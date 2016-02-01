@@ -151,7 +151,9 @@ public class InfectionViewImpl extends JFrame implements InfectionView {
 		
 		graph.addAttribute("ui.antialias");
 		graph.addAttribute("ui.stylesheet", "graph {fill-color: black;}"
-				+ "node {size: 20px;fill-color: white;text-alignment: center;}"
+				+ "node {size: 20px;fill-color: white;text-alignment: center; "
+				+ "stroke-mode: plain; stroke-width: 1px;}"
+				+ "node.selected {stroke-color: cyan;}"
 				+ "edge { fill-color: gray; }");
 		
 		viewer = new Viewer(graph,
