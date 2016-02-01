@@ -244,10 +244,12 @@ public class InfectionControllerImpl implements InfectionController {
 					// read number of users from text field
 					num = Integer.parseInt(
 							infectTextField.getText().toString());
-					if (num < 0)
+					if (num < 0) {
 						JOptionPane.showMessageDialog(new JFrame(), 
 								Error.NUM_USERS,"Error",
 								JOptionPane.ERROR_MESSAGE);
+						return;
+					}
 				} catch (NumberFormatException e) {
 					JOptionPane.showMessageDialog(new JFrame(), 
 							Error.NUM_USERS,"Error",
@@ -269,7 +271,6 @@ public class InfectionControllerImpl implements InfectionController {
 			else
 				for (Entry<String,User> entry : users.entrySet())
 					view.updateNode(entry.getKey(), entry.getValue().version());
-			
 		});
 	}
 
